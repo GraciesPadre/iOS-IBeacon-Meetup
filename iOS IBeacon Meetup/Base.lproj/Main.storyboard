@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iOS_IBeacon_Meetup" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +17,92 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-4l-BHQ">
+                                <rect key="frame" x="20" y="28" width="560" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="Be a Beacon"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RF-Q7-rSp">
+                                <rect key="frame" x="20" y="90" width="560" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="Look for Beacons"/>
+                                <connections>
+                                    <segue destination="GO1-VG-s5U" kind="show" id="Yej-jV-6kv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0RF-Q7-rSp" firstAttribute="top" secondItem="tmL-4l-BHQ" secondAttribute="bottom" constant="8" symbolic="YES" id="17k-ld-6uR"/>
+                            <constraint firstItem="0RF-Q7-rSp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Dge-cB-UFV"/>
+                            <constraint firstItem="0RF-Q7-rSp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JEe-Ap-KLm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tmL-4l-BHQ" secondAttribute="trailing" id="MOr-b0-UgV"/>
+                            <constraint firstItem="tmL-4l-BHQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="WVp-hj-MTi"/>
+                            <constraint firstItem="tmL-4l-BHQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="ekN-hW-tqI"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Beacon Finder View Controller-->
+        <scene sceneID="5Gn-4F-WW4">
+            <objects>
+                <viewController id="GO1-VG-s5U" customClass="BeaconFinderViewController" customModule="iOS_IBeacon_Meetup" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iAe-Ml-Na3"/>
+                        <viewControllerLayoutGuide type="bottom" id="AvX-gf-HoF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Md-lv-91s">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cr5-FX-HOq">
+                                <rect key="frame" x="20" y="28" width="560" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <state key="normal" title="Start looking"/>
+                                <connections>
+                                    <action selector="lookForBeaconButtonTapped:" destination="GO1-VG-s5U" eventType="touchUpInside" id="1NK-du-Aq3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qn-03-h9S">
+                                <rect key="frame" x="20" y="562" width="560" height="30"/>
+                                <state key="normal" title="I'm done Looking"/>
+                                <connections>
+                                    <action selector="doneLookingButtonTapped:" destination="GO1-VG-s5U" eventType="touchUpInside" id="wQC-KB-4bc"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Ranging" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNh-UL-WFp">
+                                <rect key="frame" x="20" y="90" width="560" height="42"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cr5-FX-HOq" firstAttribute="top" secondItem="iAe-Ml-Na3" secondAttribute="bottom" constant="8" symbolic="YES" id="Ax6-UH-IdL"/>
+                            <constraint firstItem="6Qn-03-h9S" firstAttribute="leading" secondItem="0Md-lv-91s" secondAttribute="leadingMargin" id="O2H-sk-cA4"/>
+                            <constraint firstItem="AvX-gf-HoF" firstAttribute="top" secondItem="6Qn-03-h9S" secondAttribute="bottom" constant="8" symbolic="YES" id="Owm-Ih-9TP"/>
+                            <constraint firstItem="DNh-UL-WFp" firstAttribute="top" secondItem="cr5-FX-HOq" secondAttribute="bottom" constant="8" symbolic="YES" id="Sa8-20-mUQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6Qn-03-h9S" secondAttribute="trailing" id="UnH-FQ-OC8"/>
+                            <constraint firstItem="DNh-UL-WFp" firstAttribute="leading" secondItem="0Md-lv-91s" secondAttribute="leadingMargin" id="aLc-Ee-X28"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DNh-UL-WFp" secondAttribute="trailing" id="kgb-Ns-34H"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cr5-FX-HOq" secondAttribute="trailing" id="xAb-8Z-BEg"/>
+                            <constraint firstItem="cr5-FX-HOq" firstAttribute="leading" secondItem="0Md-lv-91s" secondAttribute="leadingMargin" id="xH6-T4-85e"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="beaconStatusLabel" destination="DNh-UL-WFp" id="g7P-9F-HUg"/>
+                        <outlet property="doneLookingButton" destination="6Qn-03-h9S" id="iRL-PN-522"/>
+                        <outlet property="lookForBeaconsButton" destination="cr5-FX-HOq" id="C3Z-bd-ITB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aha-Iy-Qbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="1049"/>
         </scene>
     </scenes>
 </document>

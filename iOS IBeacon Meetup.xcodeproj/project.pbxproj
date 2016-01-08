@@ -12,6 +12,7 @@
 		9EB29AB21C3E130100BDDB90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EB29AB01C3E130100BDDB90 /* Main.storyboard */; };
 		9EB29AB41C3E130100BDDB90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EB29AB31C3E130100BDDB90 /* Assets.xcassets */; };
 		9EB29AB71C3E130100BDDB90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EB29AB51C3E130100BDDB90 /* LaunchScreen.storyboard */; };
+		9EB29AC11C3E149800BDDB90 /* BeaconFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB29AC01C3E149800BDDB90 /* BeaconFinderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9EB29AB31C3E130100BDDB90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EB29AB61C3E130100BDDB90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EB29AB81C3E130100BDDB90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EB29AC01C3E149800BDDB90 /* BeaconFinderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconFinderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				9EB29AB31C3E130100BDDB90 /* Assets.xcassets */,
 				9EB29AB51C3E130100BDDB90 /* LaunchScreen.storyboard */,
 				9EB29AB81C3E130100BDDB90 /* Info.plist */,
+				9EB29AC01C3E149800BDDB90 /* BeaconFinderViewController.swift */,
 			);
 			path = "iOS IBeacon Meetup";
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EB29AAF1C3E130100BDDB90 /* ViewController.swift in Sources */,
+				9EB29AC11C3E149800BDDB90 /* BeaconFinderViewController.swift in Sources */,
 				9EB29AAD1C3E130100BDDB90 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

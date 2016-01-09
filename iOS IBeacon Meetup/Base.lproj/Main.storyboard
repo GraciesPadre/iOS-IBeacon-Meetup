@@ -22,6 +22,9 @@
                                 <rect key="frame" x="20" y="28" width="560" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <state key="normal" title="Be a Beacon"/>
+                                <connections>
+                                    <segue destination="xwe-sc-M0r" kind="show" id="1Ha-h6-i9X"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RF-Q7-rSp">
                                 <rect key="frame" x="20" y="90" width="560" height="54"/>
@@ -45,6 +48,98 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Beacon Advertiser View Controller-->
+        <scene sceneID="jyi-3J-aiI">
+            <objects>
+                <viewController id="xwe-sc-M0r" customClass="BeaconAdvertiserViewController" customModule="iOS_IBeacon_Meetup" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lmg-d0-IYX"/>
+                        <viewControllerLayoutGuide type="bottom" id="sZp-Cn-JXN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0CF-dW-NQ3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Advertising" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eK-e3-FpK">
+                                <rect key="frame" x="20" y="28" width="560" height="42"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dnz-jS-xuO">
+                                <rect key="frame" x="20" y="78" width="560" height="94"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2I9-Q7-b8z">
+                                        <rect key="frame" x="260" y="0.0" width="41" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Major ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cX-fM-YFX">
+                                        <rect key="frame" x="248" y="21" width="64" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minor ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICu-NI-W5d">
+                                        <rect key="frame" x="248" y="42" width="65" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bjW-tk-Nga">
+                                        <rect key="frame" x="215" y="63" width="130" height="31"/>
+                                        <subviews>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="iZg-Qg-vys">
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="advertiseSwitchChangedState:" destination="xwe-sc-M0r" eventType="valueChanged" id="CIv-TV-0bi"/>
+                                                </connections>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advertise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRC-b6-gEm">
+                                                <rect key="frame" x="57" y="0.0" width="73" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2db-mO-cqe">
+                                <rect key="frame" x="20" y="562" width="560" height="30"/>
+                                <state key="normal" title="I don't wanna be a beacon"/>
+                                <connections>
+                                    <action selector="iDontWannaBeABeaconButtonTapped:" destination="xwe-sc-M0r" eventType="touchUpInside" id="V4Q-Kb-Do3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dnz-jS-xuO" firstAttribute="leading" secondItem="0CF-dW-NQ3" secondAttribute="leadingMargin" id="0Wb-co-y0q"/>
+                            <constraint firstItem="dnz-jS-xuO" firstAttribute="top" secondItem="1eK-e3-FpK" secondAttribute="bottom" constant="8" symbolic="YES" id="Bex-qU-bQ7"/>
+                            <constraint firstItem="1eK-e3-FpK" firstAttribute="top" secondItem="lmg-d0-IYX" secondAttribute="bottom" constant="8" symbolic="YES" id="Lr9-E6-PjE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dnz-jS-xuO" secondAttribute="trailing" id="NnN-jT-rJe"/>
+                            <constraint firstItem="sZp-Cn-JXN" firstAttribute="top" secondItem="2db-mO-cqe" secondAttribute="bottom" constant="8" symbolic="YES" id="PuU-5I-MjK"/>
+                            <constraint firstItem="2db-mO-cqe" firstAttribute="leading" secondItem="0CF-dW-NQ3" secondAttribute="leadingMargin" id="QFB-4v-e96"/>
+                            <constraint firstItem="1eK-e3-FpK" firstAttribute="trailing" secondItem="0CF-dW-NQ3" secondAttribute="trailingMargin" id="Tur-hf-fqz"/>
+                            <constraint firstItem="1eK-e3-FpK" firstAttribute="leading" secondItem="0CF-dW-NQ3" secondAttribute="leadingMargin" id="eSJ-z8-tRj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2db-mO-cqe" secondAttribute="trailing" id="lvD-3K-gnr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="advertiseSwitch" destination="iZg-Qg-vys" id="ckO-Vb-pCg"/>
+                        <outlet property="majorIdLabel" destination="7cX-fM-YFX" id="jW3-mm-yfm"/>
+                        <outlet property="minorIdLabel" destination="ICu-NI-W5d" id="NYE-k9-uIa"/>
+                        <outlet property="statusLabel" destination="1eK-e3-FpK" id="Rbw-Xm-7lZ"/>
+                        <outlet property="uuidLabel" destination="2I9-Q7-b8z" id="k2V-fa-pRb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V1e-xk-SLW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="278"/>
         </scene>
         <!--Beacon Finder View Controller-->
         <scene sceneID="5Gn-4F-WW4">
@@ -73,7 +168,7 @@
                                     <action selector="doneLookingButtonTapped:" destination="GO1-VG-s5U" eventType="touchUpInside" id="wQC-KB-4bc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Ranging" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNh-UL-WFp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Ranging" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DNh-UL-WFp">
                                 <rect key="frame" x="20" y="90" width="560" height="42"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>

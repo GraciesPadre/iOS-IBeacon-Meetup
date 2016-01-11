@@ -16,13 +16,33 @@ class BeaconFinderViewController : UIViewController
     @IBOutlet weak var lookForBeaconsButton: UIButton!
     @IBOutlet weak var beaconStatusLabel: UILabel!
     
+    private var bluetoothAvailable = false
+    private var locationServicesAuthorizationStatus : CLAuthorizationStatus = .NotDetermined
+    
     private var peripheralManager: CBPeripheralManager?
+    private var locationManager : CLLocationManager?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        locationManager = LocationUtilities.getLocationManager(withDelegate: self)
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        maybeEnableLookForBeaconsButton()
+    }
+    
+    private func maybeEnableLookForBeaconsButton()
+    {
+        if bluetoothAvailable && locationServicesAuthorizationStatus == .AuthorizedAlways
+        {
+            lookForBeaconsButton.enabled = true
+        }
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -33,14 +53,16 @@ class BeaconFinderViewController : UIViewController
     private func stopRangingAndMonitoring()
     {
         peripheralManager = nil
-        LocationUtilities.getLocationManager(withDelegate: self).stopRangingBeaconsInRegion(BeaconUtilities.getBeaconRegion())
-        LocationUtilities.getLocationManager(withDelegate: self).stopMonitoringForRegion(BeaconUtilities.getBeaconRegion())
+        
+        locationManager!.stopRangingBeaconsInRegion(BeaconUtilities.getBeaconRegion())
+        locationManager!.stopMonitoringForRegion(BeaconUtilities.getBeaconRegion())
+        locationManager = nil
     }
     
     @IBAction func lookForBeaconButtonTapped(sender: AnyObject)
     {
         lookForBeaconsButton.enabled = false
-        LocationUtilities.getLocationManager(withDelegate: self).startMonitoringForRegion(BeaconUtilities.getBeaconRegion())
+        locationManager!.startMonitoringForRegion(BeaconUtilities.getBeaconRegion())
     }
     
     
@@ -57,7 +79,8 @@ extension BeaconFinderViewController: CBPeripheralManagerDelegate
         switch BluetoothUtilities.obtainBluetoothState(peripheral)
         {
         case .Success:
-            lookForBeaconsButton.enabled = true
+            bluetoothAvailable = true
+            maybeEnableLookForBeaconsButton()
             
         case .Failure(let failureMessage):
             BluetoothUtilities.presentBluetoothError(failureMessage, onViewController: self)
@@ -71,7 +94,7 @@ extension BeaconFinderViewController : CLLocationManagerDelegate
     {
         print("Started monitoring for beacon region: \(region)")
         
-        LocationUtilities.getLocationManager(withDelegate: self).startRangingBeaconsInRegion(region as! CLBeaconRegion)
+        locationManager!.startRangingBeaconsInRegion(region as! CLBeaconRegion)
     }
     
     func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion)
@@ -104,5 +127,21 @@ extension BeaconFinderViewController : CLLocationManagerDelegate
             beaconStatusLabel.text = "Not ranging"
             beaconStatusLabel.backgroundColor = UIColor.groupTableViewBackgroundColor()
         }
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        locationServicesAuthorizationStatus = status
+        
+        if status != .AuthorizedAlways
+        {
+            beaconStatusLabel.text = "Location services not available"
+        }
+        else
+        {
+            beaconStatusLabel.text = "Location services available"
+        }
+        
+        maybeEnableLookForBeaconsButton()
     }
 }

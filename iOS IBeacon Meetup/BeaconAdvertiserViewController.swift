@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import CoreLocation
 
 class BeaconAdvertiserViewController : UIViewController
 {
@@ -17,7 +18,11 @@ class BeaconAdvertiserViewController : UIViewController
     @IBOutlet weak var minorIdLabel: UILabel!
     @IBOutlet weak var advertiseSwitch: UISwitch!
     
+    private var bluetoothAvailable = false
+    private var locationServicesAuthorizationStatus : CLAuthorizationStatus = .NotDetermined
+    
     private var peripheralManager: CBPeripheralManager?
+    private var locationManager : CLLocationManager?
     
     override func viewDidLoad()
     {
@@ -26,12 +31,29 @@ class BeaconAdvertiserViewController : UIViewController
         minorIdLabel.text = String(format: "Minor ID: %d", BeaconUtilities.beaconMinorId)
         
         peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        locationManager = LocationUtilities.getLocationManager(withDelegate: self)
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        maybeEnableAdvertiseButton()
+    }
+    
+    private func maybeEnableAdvertiseButton()
+    {
+        if bluetoothAvailable && locationServicesAuthorizationStatus == .AuthorizedAlways
+        {
+            advertiseSwitch.enabled = true
+        }
     }
     
     override func viewWillDisappear(animated: Bool)
     {
         stopAdvertising()
         peripheralManager = nil
+        locationManager = nil
     }
     
     @IBAction func advertiseSwitchChangedState(sender: AnyObject)
@@ -67,6 +89,25 @@ class BeaconAdvertiserViewController : UIViewController
     }
 }
 
+extension BeaconAdvertiserViewController : CLLocationManagerDelegate
+{
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        locationServicesAuthorizationStatus = status
+        
+        if status != .AuthorizedAlways
+        {
+            statusLabel.text = "Location services not available"
+        }
+        else
+        {
+            statusLabel.text = "Location services available"
+        }
+        
+        maybeEnableAdvertiseButton()
+    }
+}
+
 extension BeaconAdvertiserViewController : CBPeripheralManagerDelegate
 {
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager)
@@ -74,7 +115,8 @@ extension BeaconAdvertiserViewController : CBPeripheralManagerDelegate
         switch BluetoothUtilities.obtainBluetoothState(peripheral)
         {
         case .Success:
-            advertiseSwitch.enabled = true
+            bluetoothAvailable = true
+            maybeEnableAdvertiseButton()
             
         case .Failure(let failureMessage):
             BluetoothUtilities.presentBluetoothError(failureMessage, onViewController: self)

@@ -11,23 +11,17 @@ import CoreLocation
 
 class LocationUtilities
 {
-    static private var locationManager : CLLocationManager?
-    
     class func getLocationManager(withDelegate delegate : CLLocationManagerDelegate) -> CLLocationManager
     {
-        if locationManager == nil
-        {
-            locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
             
-            if locationManager?.respondsToSelector("requestAlwaysAuthorization") == true
-            {
-                locationManager?.requestAlwaysAuthorization()
-            }
+        locationManager.delegate = delegate
+        
+        if locationManager.respondsToSelector("requestAlwaysAuthorization") == true
+        {
+            locationManager.requestAlwaysAuthorization()
         }
         
-        locationManager?.delegate = delegate
-        
-        return locationManager!
+        return locationManager
     }
-
 }
